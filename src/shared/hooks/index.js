@@ -1,4 +1,4 @@
-import { useCategorias } from "./useCategoriaView";
-import { usePublicacionView } from "./usePublicacionView";
-
-
+export { useCategorias } from "./useCategoriaView";
+export { useComentarioAdd } from "./useComentarioAdd";
+export { usePublicacionView } from "./usePublicacionView";
+export { useComentarioWiew } from "./useComentarioWiew";

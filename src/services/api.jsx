@@ -27,3 +27,25 @@ export const categoriaWiew = async () => {
         }
     }
 }
+
+export const addComentario = async (id, data) => {
+    try {
+        return await apiBlog.post(`/publications/comment/${id}`, data)
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}
+
+export const viewComentario = async (id) => {
+    try {
+        return await apiBlog.get(`/publications/comment/${id}`)
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}
