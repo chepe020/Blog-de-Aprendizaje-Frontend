@@ -49,3 +49,25 @@ export const viewComentario = async (id) => {
         }
     }
 }
+
+export const deleteComentario = async(id) => {
+    try {
+        return await apiBlog.delete(`/publications/comment/${id}`)
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}
+
+export const updateComentario = async(id,data) => {
+    try {
+        return await apiBlog.put(`/publications/comment/${id}`,data)
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}

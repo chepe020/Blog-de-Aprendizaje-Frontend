@@ -9,6 +9,7 @@ import { ListaComentarios } from "../comentario/ListaComentarios";
 export const PublicacionesPage = () => {
   const { publication, isLoading } = usePublicacionView()
   const [filtro, setFiltro] = useState("Todos")
+  
   const { saveComentario } = useComentarioAdd()
   const { comentarios, fetchComentarios } = useComentarioWiew()
 
@@ -30,13 +31,18 @@ export const PublicacionesPage = () => {
   }
 
   const enviarComentario = async (id) => {
-    if (!nombre || !contenido) return
-    await saveComentario(id, { nombre, contenido })
+    if (!contenido.trim()) return
+
+    const comentarioData = {
+      nombre: nombre.trim() === '' ? 'Anonymous' : nombre.trim(),
+      contenido: contenido.trim()
+    }
+
+    await saveComentario(id, comentarioData)
     await fetchComentarios(id)
     setNombre("")
     setContenido("")
-  };
-
+  }
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#71C0BB' }}>      
       <Navbar onFiltrar={setFiltro} />
@@ -94,7 +100,12 @@ export const PublicacionesPage = () => {
                       Enviar Comentario
                     </button>
                 
-                    <ListaComentarios comentarios={comentarios} />
+                    <ListaComentarios
+                        comentarios={comentarios}
+                        fetchComentarios={fetchComentarios}
+                        idPublicacion={publi._id}
+                        nombre={nombre}
+                    />
                   </div>
                 )}
               </div>
@@ -103,5 +114,5 @@ export const PublicacionesPage = () => {
         )}
       </div>
     </div>
-  );
+  )
 }
